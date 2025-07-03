@@ -60,53 +60,55 @@
     </nav>
 
     <!-- Navigation Mobile -->
-    <nav id="hamburger-nav">
-      <div class="logo"></div>
-      <div class="hamburger-menu">
-        <div
-          class="hamburger-icon"
-          onclick="toggleMenu()"
-          aria-label="Ouvrir le menu mobile"
-          tabindex="0"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+    <div class="mobile-toolbar">
+      <nav id="hamburger-nav">
+        <div class="logo"></div>
+        <div class="hamburger-menu">
+          <div
+            class="hamburger-icon"
+            onclick="toggleMenu()"
+            aria-label="Ouvrir le menu mobile"
+            tabindex="0"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="menu-links">
+            <li>
+              <a href="#accueil" class="nav-link" onclick="toggleMenu()"
+                >Accueil</a
+              >
+            </li>
+            <li>
+              <a href="#apropos" class="nav-link" onclick="toggleMenu()"
+                >À propos</a
+              >
+            </li>
+            <li>
+              <a href="#competences" class="nav-link" onclick="toggleMenu()"
+                >Compétences</a
+              >
+            </li>
+            <li>
+              <a href="#projets" class="nav-link" onclick="toggleMenu()"
+                >Projets</a
+              >
+            </li>
+            <li>
+              <a href="#experience" class="nav-link" onclick="toggleMenu()"
+                >Expérience</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="nav-link" onclick="toggleMenu()"
+                >Contact</a
+              >
+            </li>
+          </div>
         </div>
-        <div class="menu-links">
-          <li>
-            <a href="#accueil" class="nav-link" onclick="toggleMenu()"
-              >Accueil</a
-            >
-          </li>
-          <li>
-            <a href="#apropos" class="nav-link" onclick="toggleMenu()"
-              >À propos</a
-            >
-          </li>
-          <li>
-            <a href="#competences" class="nav-link" onclick="toggleMenu()"
-              >Compétences</a
-            >
-          </li>
-          <li>
-            <a href="#projets" class="nav-link" onclick="toggleMenu()"
-              >Projets</a
-            >
-          </li>
-          <li>
-            <a href="#experience" class="nav-link" onclick="toggleMenu()"
-              >Expérience</a
-            >
-          </li>
-          <li>
-            <a href="#contact" class="nav-link" onclick="toggleMenu()"
-              >Contact</a
-            >
-          </li>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
     <!-- Section Accueil -->
     <section id="accueil">
@@ -209,7 +211,6 @@
     <!-- Section À propos -->
     <section id="apropos">
       <h1 class="title" data-aos="fade-up">À propos de moi</h1>
-      <h2 class="subtitle">Présentation</h2>
       <div class="section-container">
         <div class="section__pic-container" data-aos="fade-right">
           <!-- PERSONNALISATION: Autre photo de vous -->
@@ -265,7 +266,6 @@
     <!-- Section Compétences -->
     <section id="competences" class="section-padding">
       <h1 class="title" data-aos="fade-up">Mes compétences</h1>
-      <h2 class="subtitle">Technologies principales</h2>
 
       <!-- Section Technologies (Toolbox uniquement) -->
       <div class="technologies-section" data-aos="fade-up">
@@ -352,7 +352,6 @@
     <!-- Section Projets -->
     <section id="projets">
       <h1 class="title" data-aos="fade-up">Mes Projets</h1>
-      <h2 class="subtitle">Projets récents</h2>
       <div class="projects-container">
         <!-- PERSONNALISATION: Ajoutez vos projets -->
         <div class="project-card" data-aos="fade-up" data-aos-delay="100">
@@ -478,7 +477,6 @@
     <!-- Section Expérience -->
     <section id="experience" class="section-padding bg-light">
       <h1 class="title" data-aos="fade-up">Mon Expérience Professionnelle</h1>
-      <h2 class="subtitle">Expériences</h2>
       <div class="timeline">
         <div class="timeline-item" data-aos="fade-up">
           <div class="timeline-date">2025 - present</div>
@@ -526,7 +524,6 @@
     <!-- Section Contact (refaite) -->
     <section id="contact">
       <h1 class="title" data-aos="fade-up">Me contacter</h1>
-      <h2 class="subtitle">Formulaire de contact</h2>
 
       <div class="contact-container" data-aos="fade-up">
         <div class="contact-info">
