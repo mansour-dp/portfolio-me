@@ -29,7 +29,7 @@ Ce projet est un portfolio professionnel moderne et responsive, conçu pour pré
 1. Clonez le dépôt :
 
 ```bash
-git clone https://github.com/votre-username/portfolio.git
+git clone https://github.com/mansour-dp/portfolio-me.git
 ```
 
 2. Ouvrez le fichier `index.html` dans votre navigateur
@@ -57,7 +57,7 @@ portfolio/
 
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails. 
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ## 📧 Contact
 
