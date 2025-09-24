@@ -1,0 +1,29 @@
+{
+  "name": "Mansour Diop - Portfolio",
+  "short_name": "Portfolio MD",
+  "description": "Portfolio professionnel de Mansour Diop, développeur full stack",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0066ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/image.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/image.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "developer", "technology"],
+  "lang": "fr",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}

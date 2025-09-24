@@ -19,11 +19,40 @@
     <!-- Liens CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/png" href="assets/image.jpg" />
+    
+    <!-- Favicon optimisé -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/image.jpg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/image.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/image.jpg" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
     <meta
       name="description"
       content="Portfolio de Mansour Diop, développeur full stack, étudiant en informatique, projets, compétences, contact."
     />
+    
+    <!-- Meta tags Open Graph pour les réseaux sociaux -->
+    <meta property="og:title" content="Mansour Diop - Développeur Full Stack" />
+    <meta property="og:description" content="Portfolio de Mansour Diop, développeur full stack spécialisé en génie logiciel et systèmes d'information. Découvrez mes projets et compétences." />
+    <meta property="og:image" content="assets/image.jpg" />
+    <meta property="og:url" content="https://mansour-dp.github.io/portfolio-me/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="mansour-dx.dev" />
+    
+    <!-- Meta tags Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mansour Diop - Développeur Full Stack" />
+    <meta name="twitter:description" content="Portfolio de Mansour Diop, développeur full stack spécialisé en génie logiciel." />
+    <meta name="twitter:image" content="assets/image.jpg" />
+    
+    <!-- Meta tags supplémentaires pour le SEO -->
+    <meta name="keywords" content="Mansour Diop, développeur, full stack, portfolio, génie logiciel, programmation, web, Laravel, React, JavaScript" />
+    <meta name="author" content="Mansour Diop" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="fr" />
+    <meta name="theme-color" content="#0066ff" />
+    
     <script
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
@@ -37,78 +66,91 @@
     <link rel="preload" as="image" href="assets/instagram.png" />
   </head>
   <body>
-    <!-- Navigation Desktop -->
-    <nav id="desktop-nav" aria-label="Navigation principale">
-      <ul class="nav-links">
-        <li><a href="#accueil" class="nav-link active">Accueil</a></li>
-        <li><a href="#apropos" class="nav-link">À propos</a></li>
-        <li><a href="#competences" class="nav-link">Compétences</a></li>
-        <li><a href="#projets" class="nav-link">Projets</a></li>
-        <li><a href="#experience" class="nav-link">Expérience</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-        <li>
-          <img
-            src="assets/theme_light.png"
-            id="modeToggle"
-            class="icon"
-            src-light="assets/theme_light.png"
-            src-dark="assets/theme_dark.png"
-            alt="Mode toggle"
-          />
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Navigation Mobile -->
-    <div class="mobile-toolbar">
-      <nav id="hamburger-nav">
-        <div class="logo"></div>
-        <div class="hamburger-menu">
-          <div
-            class="hamburger-icon"
-            onclick="toggleMenu()"
-            aria-label="Ouvrir le menu mobile"
-            tabindex="0"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- Navigation Moderne -->
+    <nav class="modern-nav" aria-label="Navigation principale">
+      <div class="nav-container">
+        <!-- Logo Section -->
+        <button class="logo-section">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="code-icon">
+              <path d="m18 16 4-4-4-4"></path>
+              <path d="m6 8-4 4 4 4"></path>
+              <path d="m14.5 4-5 16"></path>
+            </svg>
           </div>
-          <div class="menu-links">
-            <li>
-              <a href="#accueil" class="nav-link" onclick="toggleMenu()"
-                >Accueil</a
-              >
-            </li>
-            <li>
-              <a href="#apropos" class="nav-link" onclick="toggleMenu()"
-                >À propos</a
-              >
-            </li>
-            <li>
-              <a href="#competences" class="nav-link" onclick="toggleMenu()"
-                >Compétences</a
-              >
-            </li>
-            <li>
-              <a href="#projets" class="nav-link" onclick="toggleMenu()"
-                >Projets</a
-              >
-            </li>
-            <li>
-              <a href="#experience" class="nav-link" onclick="toggleMenu()"
-                >Expérience</a
-              >
-            </li>
-            <li>
-              <a href="#contact" class="nav-link" onclick="toggleMenu()"
-                >Contact</a
-              >
-            </li>
+          <span class="logo-text">MANSOUR</span>
+        </button>
+
+        <!-- Navigation Links Desktop -->
+        <div class="desktop-nav-links">
+          <button class="nav-button" data-target="#accueil">
+            <span class="nav-text">Accueil</span>
+            <div class="nav-bg"></div>
+            <div class="nav-dot"></div>
+          </button>
+          <button class="nav-button" data-target="#apropos">
+            <span class="nav-text">À propos</span>
+            <div class="nav-bg"></div>
+            <div class="nav-dot"></div>
+          </button>
+          <button class="nav-button" data-target="#competences">
+            <span class="nav-text">Compétences</span>
+            <div class="nav-bg"></div>
+            <div class="nav-dot"></div>
+          </button>
+          <button class="nav-button" data-target="#projets">
+            <span class="nav-text">Projets</span>
+            <div class="nav-bg"></div>
+            <div class="nav-dot"></div>
+          </button>
+          <button class="nav-button" data-target="#experience">
+            <span class="nav-text">Expérience</span>
+            <div class="nav-bg"></div>
+            <div class="nav-dot"></div>
+          </button>
+          <button class="nav-button" data-target="#contact">
+            <span class="nav-text">Contact</span>
+            <div class="nav-bg"></div>
+            <div class="nav-dot"></div>
+          </button>
+        </div>
+
+        <!-- Controls Desktop -->
+        <div class="desktop-controls">
+          <div class="controls-group">
+            <button class="lang-button" aria-label="Language: FR">
+              <span class="flag">🇫🇷</span>
+              <span class="lang-text">FR</span>
+            </button>
+            <div class="separator"></div>
+            <button class="theme-button" id="modeToggle" aria-label="Toggle theme">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </button>
           </div>
         </div>
-      </nav>
-    </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" onclick="toggleMenu()" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon">
+            <path d="M4 12h16"></path>
+            <path d="M4 18h16"></path>
+            <path d="M4 6h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#accueil" class="mobile-nav-link" onclick="toggleMenu()">Accueil</a>
+        <a href="#apropos" class="mobile-nav-link" onclick="toggleMenu()">À propos</a>
+        <a href="#competences" class="mobile-nav-link" onclick="toggleMenu()">Compétences</a>
+        <a href="#projets" class="mobile-nav-link" onclick="toggleMenu()">Projets</a>
+        <a href="#experience" class="mobile-nav-link" onclick="toggleMenu()">Expérience</a>
+        <a href="#contact" class="mobile-nav-link" onclick="toggleMenu()">Contact</a>
+      </div>
+    </nav>
 
     <!-- Section Accueil -->
     <section id="accueil">
@@ -381,13 +423,16 @@
                 href="https://github.com/mansour-dx/KaayAssurer"
                 class="btn project-btn btn-color-1"
                 target="_blank"
-                >Repository</a
+                rel="noopener"
+                >Voir le Code</a
               >
               <a
-                href="https://github.com/mansour-dx/KaayAssurer"
+                href="#"
                 class="btn project-btn btn-color-2"
                 target="_blank"
-                >Github</a
+                rel="noopener"
+                onclick="alert('Démo bientôt disponible')"
+                >Démo Live</a
               >
             </div>
           </div>
@@ -421,13 +466,16 @@
                 href="https://github.com/mansour-dx/gestion-entreprise-laravel"
                 class="btn project-btn btn-color-1"
                 target="_blank"
-                >Repository</a
+                rel="noopener"
+                >Voir le Code</a
               >
               <a
-                href="https://github.com/mansour-dx/gestion-entreprise-laravel"
+                href="#"
                 class="btn project-btn btn-color-2"
                 target="_blank"
-                >Github</a
+                rel="noopener"
+                onclick="alert('Démo bientôt disponible')"
+                >Démo Live</a
               >
             </div>
           </div>
@@ -460,13 +508,16 @@
                 href="https://github.com/mansour-dx/Sudoku-Solver-Java"
                 class="btn project-btn btn-color-1"
                 target="_blank"
-                >Repository</a
+                rel="noopener"
+                >Voir le Code</a
               >
               <a
-                href="https://github.com/mansour-dx/Sudoku-Solver-Java"
+                href="#"
                 class="btn project-btn btn-color-2"
                 target="_blank"
-                >GitHub</a
+                rel="noopener"
+                onclick="alert('Application CLI - pas de démo web')"
+                >Application CLI</a
               >
             </div>
           </div>
@@ -539,7 +590,7 @@
             </div>
             <h3>Email</h3>
             <p>
-              <a href="mailto:mansourd197@gmail.com">contact@msr.com</a>
+              <a href="mailto:mansourd197@gmail.com">mansourd197@gmail.com</a>
             </p>
           </div>
 

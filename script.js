@@ -1,20 +1,23 @@
-// Fonction pour le menu hamburger mobile
+// Fonction pour le menu mobile moderne
 function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
-  menu.classList.toggle("open");
-  icon.classList.toggle("open");
+  const mobileMenu = document.getElementById("mobileMenu");
+  mobileMenu.classList.toggle("open");
 }
 
-// Initialisation des animations au défilement (AOS)
+// Initialisation des animations au défilement (AOS) - Optimisé
 document.addEventListener("DOMContentLoaded", function () {
+  // Détection des capacités de l'appareil
+  const isLowEndDevice = navigator.hardwareConcurrency <= 2 || navigator.deviceMemory <= 2;
+  const isMobile = window.innerWidth < 768;
+  
   AOS.init({
-    duration: 1000, // Durée des animations en millisecondes
+    duration: isMobile ? 600 : 1000, // Durée réduite sur mobile
     once: true, // Les animations ne se jouent qu'une fois
     mirror: false, // Ne pas rejouer les animations en remontant
+    offset: isMobile ? 50 : 120, // Déclencher plus tôt sur mobile
     disable: function () {
-      // Désactiver sur les petits appareils pour des performances optimales
-      return window.innerWidth < 768;
+      // Désactiver sur les appareils peu performants ou très petits écrans
+      return isLowEndDevice || window.innerWidth < 480;
     },
   });
 
@@ -35,32 +38,78 @@ document.addEventListener("DOMContentLoaded", function () {
   handleResize();
 });
 
-// Gestion de la taille d'écran
+// Gestion de la taille d'écran - Optimisée
 function handleResize() {
   // Ajuster la hauteur pour les appareils mobiles (éviter les problèmes avec la barre d'adresse)
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
+  
+  // Réajuster AOS si nécessaire
+  if (typeof AOS !== 'undefined') {
+    AOS.refresh();
+  }
+  
+  // Optimisation pour les changements d'orientation
+  const isMobile = window.innerWidth < 768;
+  const isLandscape = window.innerWidth > window.innerHeight;
+  
+  if (isMobile && isLandscape) {
+    document.body.classList.add('mobile-landscape');
+  } else {
+    document.body.classList.remove('mobile-landscape');
+  }
+  
+  // Ajustement dynamique de la grille des projets
+  const projectsContainer = document.querySelector('.projects-container');
+  if (projectsContainer) {
+    if (window.innerWidth < 480) {
+      projectsContainer.style.gridTemplateColumns = '1fr';
+    } else if (window.innerWidth < 768) {
+      projectsContainer.style.gridTemplateColumns = '1fr';
+    } else if (window.innerWidth < 1024) {
+      projectsContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    } else {
+      projectsContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(320px, 1fr))';
+    }
+  }
 }
 
-// Navigation active lors du défilement
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-link");
+// Navigation moderne - gestion des clics et scroll
+document.addEventListener("DOMContentLoaded", function () {
+  const navButtons = document.querySelectorAll(".nav-button");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+  const sections = document.querySelectorAll("section");
 
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    if (scrollY >= sectionTop - sectionHeight / 3) {
-      current = section.getAttribute("id");
-    }
+  // Gestion des clics sur les boutons de navigation
+  navButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      const target = this.getAttribute("data-target");
+      const targetSection = document.querySelector(target);
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }
+    });
   });
 
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("href").substring(1) === current) {
-      link.classList.add("active");
-    }
+  // Navigation active lors du défilement
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= sectionTop - sectionHeight / 3) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    // Mise à jour des boutons desktop
+    navButtons.forEach((button) => {
+      button.classList.remove("active");
+      const target = button.getAttribute("data-target");
+      if (target === `#${current}`) {
+        button.classList.add("active");
+      }
+    });
   });
 });
 
@@ -298,9 +347,12 @@ function revealOnScroll() {
 }
 
 // Exécuter lors du défilement pour dispositifs où AOS est désactivé
+let scrollTimeout;
 window.addEventListener("scroll", function () {
   if (window.innerWidth < 768) {
-    revealOnScroll();
+    // Throttle scroll events pour les performances
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(revealOnScroll, 16); // ~60fps
   }
 });
 
@@ -317,4 +369,53 @@ document.addEventListener("DOMContentLoaded", function () {
       this.style.display = "none";
     });
   });
+  
+  // Gestion des gestes tactiles pour la navigation
+  let startX, startY;
+  
+  document.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  });
+  
+  document.addEventListener('touchmove', function(e) {
+    if (!startX || !startY) return;
+    
+    let diffX = startX - e.touches[0].clientX;
+    let diffY = startY - e.touches[0].clientY;
+    
+    // Swipe horizontal pour ouvrir/fermer le menu sur mobile
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      const menu = document.querySelector(".menu-links");
+      const icon = document.querySelector(".hamburger-icon");
+      
+      if (diffX > 0 && menu && menu.classList.contains("open")) {
+        // Swipe left - fermer le menu
+        menu.classList.remove("open");
+        icon.classList.remove("open");
+      }
+    }
+    
+    startX = null;
+    startY = null;
+  });
+  
+  // Optimisation des performances sur mobile
+  if ('serviceWorker' in navigator && window.innerWidth < 768) {
+    // Préchargement intelligent des images
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src || img.src;
+          img.classList.remove('lazy');
+          observer.unobserve(img);
+        }
+      });
+    });
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
 });
