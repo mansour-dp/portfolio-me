@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover"
     />
-    <title>mansour-dx.dev</title>
+    <title>mansour-dp.dev</title>
     <!-- Preload des polices pour éviter les FOIT/FOUT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,10 +20,12 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     
-    <!-- Favicon optimisé -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/image.jpg" />
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/image.jpg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/image.jpg" />
+    <!-- Favicon optimisé avec logo de code bleu -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json" />
@@ -35,7 +37,7 @@
     <!-- Meta tags Open Graph pour les réseaux sociaux -->
     <meta property="og:title" content="Mansour Diop - Développeur Full Stack" />
     <meta property="og:description" content="Portfolio de Mansour Diop, développeur full stack spécialisé en génie logiciel et systèmes d'information. Découvrez mes projets et compétences." />
-    <meta property="og:image" content="assets/image.jpg" />
+    <meta property="og:image" content="apple-touch-icon.png" />
     <meta property="og:url" content="https://mansour-dp.github.io/portfolio-me/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="mansour-dx.dev" />
@@ -44,7 +46,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mansour Diop - Développeur Full Stack" />
     <meta name="twitter:description" content="Portfolio de Mansour Diop, développeur full stack spécialisé en génie logiciel." />
-    <meta name="twitter:image" content="assets/image.jpg" />
+    <meta name="twitter:image" content="apple-touch-icon.png" />
     
     <!-- Meta tags supplémentaires pour le SEO -->
     <meta name="keywords" content="Mansour Diop, développeur, full stack, portfolio, génie logiciel, programmation, web, Laravel, React, JavaScript" />
@@ -70,7 +72,7 @@
     <nav class="modern-nav" aria-label="Navigation principale">
       <div class="nav-container">
         <!-- Logo Section -->
-        <button class="logo-section">
+        <button class="logo-section" data-target="#accueil">
           <div class="logo-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="code-icon">
               <path d="m18 16 4-4-4-4"></path>
@@ -118,11 +120,6 @@
         <!-- Controls Desktop -->
         <div class="desktop-controls">
           <div class="controls-group">
-            <button class="lang-button" aria-label="Language: FR">
-              <span class="flag">🇫🇷</span>
-              <span class="lang-text">FR</span>
-            </button>
-            <div class="separator"></div>
             <button class="theme-button" id="modeToggle" aria-label="Toggle theme">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
                 <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
@@ -263,43 +260,45 @@
           />
         </div>
         <div class="about-details-container" data-aos="fade-left">
-          <div class="about-containers">
-            <div class="details-container">
-              <h3>Expérience</h3>
-              <p>
-                <!-- PERSONNALISATION : Mon expérience -->
-                3 ans d'expérience académique et professionnelle<br />
-                Spécialisé en Génie logiciel et systèmes d'information<br />
-                Expérience en développement mobile et web
+          <div class="text-container">
+            <div class="prose prose-lg dark:prose-invert max-w-none">
+              <p class="text-lg text-muted-foreground leading-relaxed mb-6">
+                Je suis un développeur Full Stack passionné avec une base solide dans les technologies frontend et backend.
               </p>
-            </div>
-            <div class="details-container">
-              <h3>Éducation</h3>
-              <p>
-                Titulaire d'un diplôme de Technicien Supérieur en Informatique
-                (DST), obtenu à l'École Supérieure Polytechnique de Dakar,<br />
-                je poursuis actuellement une Licence 3 en Génie Logiciel et
-                Systèmes d'Information.
+              <p class="text-lg text-muted-foreground leading-relaxed mb-6">
+                Je me spécialise dans le développement frontend et backend, avec une expertise dans des technologies telles que React, PHP, Python (Django), JavaScript et MySQL. J'ai travaillé avec succès sur une variété de projets, notamment une application de chat inspirée de WhatsApp construite avec JavaScript et une architecture SPA, ainsi que plusieurs applications web qui intègrent l'authentification utilisateur et la gestion des données.
+              </p>
+              <p class="text-lg text-muted-foreground leading-relaxed mb-6">
+                Ma passion réside dans la résolution de problèmes complexes grâce à la technologie. Je suis très motivé par l'opportunité de travailler sur des projets difficiles qui nécessitent des solutions créatives et efficaces. Je m'efforce d'écrire du code propre, efficace et maintenable, avec un fort accent sur la livraison d'expériences utilisateur de qualité.
+              </p>
+              <p class="text-lg text-muted-foreground leading-relaxed">
+                En regardant vers l'avenir, je suis ravi de continuer à grandir en tant que développeur et de contribuer à des projets innovants qui ont un impact significatif. Je suis toujours désireux d'apprendre de nouvelles technologies et de collaborer avec des professionnels partageant les mêmes idées qui partagent une passion pour l'excellence dans le développement logiciel.
               </p>
             </div>
           </div>
-          <div class="text-container">
-            <p>
-              J'ai découvert la programmation en 2021, animé par une curiosité
-              naturelle pour le fonctionnement des technologies numériques. J'ai
-              commencé à apprendre les bases du code sur la plateforme
-              <a href="https://openclassrooms.com/fr" target="_blank"
-                >OpenClassrooms</a
-              >, ce qui m'a permis de comprendre les fondamentaux de
-              l'informatique.
-            </p>
-            <p>
-              Aujourd'hui, je poursuis ma formation en Licence 3 en Génie
-              Logiciel et Systèmes d'Information à l'École Supérieure
-              Polytechnique de Dakar, avec un intérêt particulier pour le
-              développement web, les bases de données, les systèmes
-              d'information et l'administration système.
-            </p>
+        </div>
+      </div>
+      
+      <!-- Section des statistiques -->
+      <div class="transition-all duration-700 delay-600 animate-fade-in opacity-100" data-aos="fade-up">
+        <div class="card glass-effect">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center group cursor-default" style="animation-delay: 800ms;">
+              <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 group-hover:scale-110 transition-transform duration-300">3+</div>
+              <div class="text-sm md:text-base text-muted-foreground font-medium">Années d'expérience</div>
+            </div>
+            <div class="text-center group cursor-default" style="animation-delay: 900ms;">
+              <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 group-hover:scale-110 transition-transform duration-300">15+</div>
+              <div class="text-sm md:text-base text-muted-foreground font-medium">Projets réalisés</div>
+            </div>
+            <div class="text-center group cursor-default" style="animation-delay: 1000ms;">
+              <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 group-hover:scale-110 transition-transform duration-300">100%</div>
+              <div class="text-sm md:text-base text-muted-foreground font-medium">Satisfaction client</div>
+            </div>
+            <div class="text-center group cursor-default" style="animation-delay: 1100ms;">
+              <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 group-hover:scale-110 transition-transform duration-300">24/7</div>
+              <div class="text-sm md:text-base text-muted-foreground font-medium">Support technique</div>
+            </div>
           </div>
         </div>
       </div>
@@ -337,9 +336,24 @@
             <span class="technology-name">JavaScript</span>
           </div>
 
+          <div class="technology-item" data-aos="zoom-in" data-aos-delay="160">
+            <img src="assets/typescript.png" alt="TypeScript" class="technology-icon" />
+            <span class="technology-name">TypeScript</span>
+          </div>
+
           <div class="technology-item" data-aos="zoom-in" data-aos-delay="100">
             <img src="assets/react.png" alt="React" class="technology-icon" />
             <span class="technology-name">React</span>
+          </div>
+
+          <div class="technology-item" data-aos="zoom-in" data-aos-delay="125">
+            <div class="vue-icon technology-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 1L12 22L0 1h4.8l7.2 13L19.2 1H24z" fill="#4FC08D"/>
+                <path d="M19.2 1L12 14L4.8 1h2.4L12 8.5L16.8 1h2.4z" fill="#35495E"/>
+              </svg>
+            </div>
+            <span class="technology-name">Vue.js</span>
           </div>
 
           <div class="technology-item" data-aos="zoom-in" data-aos-delay="300">
@@ -387,6 +401,36 @@
             <img src="assets/cli.png" alt="cli" class="technology-icon" />
             <span class="technology-name">cli</span>
           </div>
+
+          <!-- Docker -->
+          <div class="technology-item" data-aos="zoom-in" data-aos-delay="700">
+            <img src="assets/docker.png" alt="Docker" class="technology-icon" />
+            <span class="technology-name">Docker</span>
+          </div>
+
+          <!-- Angular -->
+          <div class="technology-item" data-aos="zoom-in" data-aos-delay="750">
+            <img src="assets/angular.gif" alt="Angular" class="technology-icon" />
+            <span class="technology-name">Angular</span>
+          </div>
+
+          <!-- PostgreSQL -->
+          <div class="technology-item" data-aos="zoom-in" data-aos-delay="800">
+            <img src="assets/elephant.png" alt="PostgreSQL" class="technology-icon" />
+            <span class="technology-name">PostgreSQL</span>
+          </div>
+
+          <!-- TablePlus -->
+          <div class="technology-item" data-aos="zoom-in" data-aos-delay="850">
+            <img src="assets/tableplus.png" alt="TablePlus" class="technology-icon" />
+            <span class="technology-name">TablePlus</span>
+          </div>
+
+          <!-- Figma -->
+          <div class="technology-item" data-aos="zoom-in" data-aos-delay="900">
+            <img src="assets/figma.png" alt="Figma" class="technology-icon" />
+            <span class="technology-name">Figma</span>
+          </div>
         </div>
       </div>
     </section>
@@ -396,6 +440,85 @@
       <h1 class="title" data-aos="fade-up">Mes Projets</h1>
       <div class="projects-container">
         <!-- PERSONNALISATION: Ajoutez vos projets -->
+        
+        <!-- Nouveau Projet 1 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+          <div class="project-image">
+            <img
+              src="assets/xPertManager.png"
+              alt="XpertManager"
+              class="project-img"
+            />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">XpertManager</h3>
+            <p class="project-description">
+              XpertManager est une plateforme intégrée de gestion, qui regroupe dans un environnement unique des fonctionnalités clés, indispensables pour toute organisation moderne : qu'elle soit publique, privée ou associative.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">EmailJS</span>
+            </div>
+            <div class="btn-container">
+              <a
+                href="https://github.com/mansour-dp/XpertManager"
+                class="btn project-btn btn-color-1"
+                target="_blank"
+                rel="noopener"
+                >Voir le Code</a
+              >
+              <a
+                href="https://www.xpertmanager.org/"
+                class="btn project-btn btn-color-2"
+                target="_blank"
+                rel="noopener"
+                >Démo Live</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Nouveau Projet 2 -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="75">
+          <div class="project-image">
+            <img
+              src="assets/NoteMaster.png"
+              alt="NoteMaster"
+              class="project-img"
+            />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">NoteMaster</h3>
+            <p class="project-description">
+              NoteMaster est une application web moderne que j'ai développée pour faciliter l'apprentissage. Elle combine prise de notes intuitive et intelligence artificielle afin de générer automatiquement des quiz personnalisés à partir du contenu saisi par l'utilisateur.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">GroqAPI</span>
+              <span class="tech-tag">GIT</span>
+            </div>
+            <div class="btn-container">
+              <a
+                href="https://github.com/mansour-dp/NoteMaster"
+                class="btn project-btn btn-color-1"
+                target="_blank"
+                rel="noopener"
+                >Voir le Code</a
+              >
+              <a
+                href="https://activelearning.vercel.app/"
+                class="btn project-btn btn-color-2"
+                target="_blank"
+                rel="noopener"
+                >Démo Live</a
+              >
+            </div>
+          </div>
+        </div>
+
         <div class="project-card" data-aos="fade-up" data-aos-delay="100">
           <div class="project-image">
             <img
@@ -426,20 +549,18 @@
                 rel="noopener"
                 >Voir le Code</a
               >
-              <a
-                href="#"
-                class="btn project-btn btn-color-2"
-                target="_blank"
-                rel="noopener"
-                onclick="alert('Démo bientôt disponible')"
-                >Démo Live</a
+              <button
+                class="btn project-btn btn-color-2 btn-disabled"
+                onclick="alert('Démo bientôt disponible - Projet en développement')"
+                disabled
+                >Démo Live</button
               >
             </div>
           </div>
         </div>
 
         <!-- Projet 2 -->
-        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-card" data-aos="fade-up" data-aos-delay="150">
           <div class="project-image">
             <img
               src="assets/projet2 (2).png"
@@ -469,20 +590,18 @@
                 rel="noopener"
                 >Voir le Code</a
               >
-              <a
-                href="#"
-                class="btn project-btn btn-color-2"
-                target="_blank"
-                rel="noopener"
-                onclick="alert('Démo bientôt disponible')"
-                >Démo Live</a
+              <button
+                class="btn project-btn btn-color-2 btn-disabled"
+                onclick="alert('Démo bientôt disponible - Projet en développement')"
+                disabled
+                >Démo Live</button
               >
             </div>
           </div>
         </div>
 
         <!-- Projet 3 -->
-        <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="project-card" data-aos="fade-up" data-aos-delay="175">
           <div class="project-image">
             <img
               src="assets/projet2 (3).png"
@@ -509,15 +628,13 @@
                 class="btn project-btn btn-color-1"
                 target="_blank"
                 rel="noopener"
+               
                 >Voir le Code</a
               >
-              <a
-                href="#"
+              <button
                 class="btn project-btn btn-color-2"
-                target="_blank"
-                rel="noopener"
-                onclick="alert('Application CLI - pas de démo web')"
-                >Application CLI</a
+                onclick="alert('Application CLI - Pas de démo web disponible')"
+                >Application CLI</button
               >
             </div>
           </div>
@@ -639,7 +756,7 @@
             <input
               type="hidden"
               name="_next"
-              value="https://mansour-dx.github.io/#contact-success"
+              value="#contact"
             />
             <input
               type="hidden"
