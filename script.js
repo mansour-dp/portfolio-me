@@ -523,14 +523,33 @@ class ModernScrollToTop {
   }
   
   updateCircumference() {
-    const isMobileNow = window.innerWidth <= 768;
-    if (isMobileNow !== this.isMobile) {
-      this.isMobile = isMobileNow;
-      this.circumference = 2 * Math.PI * (this.isMobile ? 22 : 26);
+    const width = window.innerWidth;
+    let radius;
+    
+    if (width <= 360) {
+      radius = 20; // Très petits mobiles
+    } else if (width <= 480) {
+      radius = 21; // Petits mobiles
+    } else if (width <= 768) {
+      radius = 23; // Mobiles
+    } else if (width <= 1024) {
+      radius = 24; // Tablettes
+    } else {
+      radius = 26; // Desktop
+    }
+    
+    const newCircumference = 2 * Math.PI * radius;
+    
+    if (newCircumference !== this.circumference) {
+      this.circumference = newCircumference;
       if (this.progressCircle) {
         this.progressCircle.style.strokeDasharray = this.circumference;
+        // Recalculer immédiatement la progression
+        this.handleScroll();
       }
     }
+    
+    this.isMobile = width <= 768;
   }
   
   handleScroll() {
@@ -542,8 +561,19 @@ class ModernScrollToTop {
     const offset = this.circumference - (scrollPercent * this.circumference);
     this.progressCircle.style.strokeDashoffset = offset;
     
-    // Afficher/masquer le bouton avec un seuil plus réactif
-    const threshold = this.isMobile ? 150 : 200;
+    // Afficher/masquer le bouton avec un seuil adaptatif selon la taille d'écran
+    const width = window.innerWidth;
+    let threshold;
+    
+    if (width <= 480) {
+      threshold = 120; // Très petits écrans
+    } else if (width <= 768) {
+      threshold = 150; // Mobiles
+    } else if (width <= 1024) {
+      threshold = 180; // Tablettes
+    } else {
+      threshold = 200; // Desktop
+    }
     
     if (scrollTop > threshold && !this.isVisible) {
       this.showButton();
