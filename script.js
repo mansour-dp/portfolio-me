@@ -171,18 +171,13 @@ let themeIcons = [];
 
 // Fonction pour mettre à jour le bouton mobile
 function updateMobileThemeButton(theme) {
-  console.log('updateMobileThemeButton appelée avec:', theme); // Debug
   const mobileThemeText = document.querySelector('.mobile-theme-text');
-  console.log('Element mobile-theme-text trouvé:', mobileThemeText); // Debug
   if (mobileThemeText) {
     if (theme === "dark") {
       mobileThemeText.textContent = "Mode clair";
     } else {
       mobileThemeText.textContent = "Mode sombre";
     }
-    console.log('Texte mis à jour:', mobileThemeText.textContent); // Debug
-  } else {
-    console.error('Element .mobile-theme-text non trouvé!'); // Debug
   }
 }
 
@@ -218,9 +213,7 @@ function setLightMode() {
 
 // Fonction pour basculer entre les thèmes (GLOBALE)
 function setTheme() {
-  console.log('setTheme() appelée'); // Debug
   let currentTheme = document.body.getAttribute("theme");
-  console.log('Theme actuel:', currentTheme); // Debug
   if (currentTheme === "dark") {
     setLightMode();
   } else {
@@ -301,59 +294,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Modern contact form validation and feedback
-const contactForm = document.getElementById("contactForm");
-const formStatus = document.getElementById("form-status");
+// Modern contact form validation and feedback - SUPPRIMÉ (remplacé par la validation EmailJS)
 
-if (contactForm) {
-  contactForm.addEventListener("submit", function (e) {
-    // Validation simple côté client
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const subject = document.getElementById("subject").value.trim();
-    const message = document.getElementById("message").value.trim();
-    let valid = true;
-    let errorMsg = "";
-    if (!name) {
-      valid = false;
-      errorMsg = "Veuillez entrer votre nom.";
-    } else if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-      valid = false;
-      errorMsg = "Veuillez entrer un email valide.";
-    } else if (!subject) {
-      valid = false;
-      errorMsg = "Veuillez entrer un sujet.";
-    } else if (!message) {
-      valid = false;
-      errorMsg = "Veuillez entrer un message.";
-    }
-    if (!valid) {
-      e.preventDefault();
-      formStatus.textContent = errorMsg;
-      formStatus.style.color = "#e74c3c";
-      return false;
-    } else {
-      formStatus.textContent = "Envoi en cours...";
-      formStatus.style.color = "#4f8cff";
-    }
-  });
-}
-
-// Affichage du message de succès si redirigé après envoi
-if (window.location.hash === "#contact-success") {
-  setTimeout(() => {
-    const formStatus = document.getElementById("form-status");
-    if (formStatus) {
-      formStatus.textContent = "Merci, votre message a bien été envoyé !";
-      formStatus.style.color = "#27ae60";
-    }
-    // Scroll to contact section
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  }, 300);
-}
+// Gestion automatique des messages de statut de contact via EmailJS
 
 // Amélioration pour dispositifs mobiles - gestion de la taille réelle de l'écran
 function revealOnScroll() {
@@ -493,12 +436,12 @@ document.addEventListener('DOMContentLoaded', function() {
         templateParams
       )
       .then(function(response) {
-        console.log('Email envoyé avec succès!', response.status, response.text);
+        // Email envoyé avec succès
         showFormStatus('success', 'Message envoyé avec succès ! Je vous répondrai bientôt.');
         contactForm.reset();
       })
       .catch(function(error) {
-        console.log('Erreur lors de l\'envoi:', error);
+        // Erreur lors de l'envoi
         showFormStatus('error', 'Erreur lors de l\'envoi. Veuillez réessayer ou me contacter directement.');
       })
       .finally(function() {
@@ -520,4 +463,145 @@ document.addEventListener('DOMContentLoaded', function() {
       formStatus.style.display = 'none';
     }, 5000);
   }
+});
+
+// ============================
+// BOUTON SCROLL TO TOP MODERNE AVEC PROGRESSION
+// ============================
+
+class ModernScrollToTop {
+  constructor() {
+    this.btn = document.getElementById('scrollToTopBtn');
+    this.progressCircle = document.querySelector('.progress-ring-circle');
+    this.isVisible = false;
+    this.circumference = 2 * Math.PI * 26; // rayon desktop = 26
+    this.isMobile = window.innerWidth <= 768;
+    
+    if (!this.btn || !this.progressCircle) return;
+    
+    this.init();
+  }
+  
+  init() {
+    // Adapter la circonférence selon l'écran
+    this.updateCircumference();
+    
+    // Configurer le cercle de progression
+    this.progressCircle.style.strokeDasharray = this.circumference;
+    this.progressCircle.style.strokeDashoffset = this.circumference;
+    
+    // Throttle pour optimiser les performances du scroll
+    this.throttledScroll = this.throttle(this.handleScroll.bind(this), 16); // 60fps
+    
+    // Event listeners optimisés
+    this.btn.addEventListener('click', this.scrollToTop.bind(this));
+    window.addEventListener('scroll', this.throttledScroll, { passive: true });
+    window.addEventListener('resize', this.handleResize.bind(this));
+    
+    // Initialiser immédiatement
+    this.handleScroll();
+  }
+  
+  // Fonction throttle pour optimiser les performances
+  throttle(func, delay) {
+    let timeoutId;
+    let lastExecTime = 0;
+    return function (...args) {
+      const currentTime = Date.now();
+      
+      if (currentTime - lastExecTime > delay) {
+        func.apply(this, args);
+        lastExecTime = currentTime;
+      } else {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+          lastExecTime = Date.now();
+        }, delay - (currentTime - lastExecTime));
+      }
+    };
+  }
+  
+  updateCircumference() {
+    const isMobileNow = window.innerWidth <= 768;
+    if (isMobileNow !== this.isMobile) {
+      this.isMobile = isMobileNow;
+      this.circumference = 2 * Math.PI * (this.isMobile ? 22 : 26);
+      if (this.progressCircle) {
+        this.progressCircle.style.strokeDasharray = this.circumference;
+      }
+    }
+  }
+  
+  handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.min(scrollTop / docHeight, 1);
+    
+    // Mettre à jour la progression du cercle
+    const offset = this.circumference - (scrollPercent * this.circumference);
+    this.progressCircle.style.strokeDashoffset = offset;
+    
+    // Afficher/masquer le bouton avec un seuil plus réactif
+    const threshold = this.isMobile ? 150 : 200;
+    
+    if (scrollTop > threshold && !this.isVisible) {
+      this.showButton();
+    } else if (scrollTop <= threshold && this.isVisible) {
+      this.hideButton();
+    }
+  }
+  
+  handleResize() {
+    this.updateCircumference();
+    this.handleScroll(); // Recalculer la progression
+  }
+  
+  showButton() {
+    this.btn.classList.add('show');
+    this.isVisible = true;
+  }
+  
+  hideButton() {
+    this.btn.classList.remove('show');
+    this.isVisible = false;
+  }
+  
+  scrollToTop() {
+    // Animation de scroll fluide et rapide
+    const startPosition = window.pageYOffset;
+    const duration = 600; // Durée réduite pour plus de réactivité
+    const startTime = performance.now();
+    
+    const easeOutQuart = (t) => {
+      return 1 - Math.pow(1 - t, 4); // Animation plus rapide
+    };
+    
+    const animateScroll = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutQuart(progress);
+      
+      window.scrollTo(0, startPosition * (1 - easedProgress));
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+    
+    requestAnimationFrame(animateScroll);
+    
+    // Feedback visuel
+    this.btn.style.transform = 'translateY(-1px) scale(0.95)';
+    setTimeout(() => {
+      if (this.btn.style.transform) {
+        this.btn.style.transform = '';
+      }
+    }, 150);
+  }
+}
+
+// Initialiser le bouton scroll to top
+document.addEventListener('DOMContentLoaded', function() {
+  new ModernScrollToTop();
 });
