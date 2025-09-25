@@ -146,6 +146,17 @@
         <a href="#projets" class="mobile-nav-link" onclick="toggleMenu()">Projets</a>
         <a href="#experience" class="mobile-nav-link" onclick="toggleMenu()">Expérience</a>
         <a href="#contact" class="mobile-nav-link" onclick="toggleMenu()">Contact</a>
+        
+        <!-- Séparateur -->
+        <div class="mobile-menu-separator"></div>
+        
+        <!-- Bouton Dark Mode Mobile -->
+        <button class="mobile-theme-button" onclick="setTheme(); toggleMenu();" aria-label="Basculer le thème">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mobile-theme-icon">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+          <span class="mobile-theme-text">Mode sombre</span>
+        </button>
       </div>
     </nav>
 
@@ -1189,7 +1200,7 @@
     </footer>
 
     <!-- Section Copyright - Totalement séparée en bas de page -->
-    <div class="w-full bg-background-100 dark:bg-background-900 border-t border-border-50">
+    <div class="w-full bg-transparent border-t border-border-50">
       <div class="container mx-auto px-4 py-6">
         <div class="text-center transition-all duration-700 delay-800 animate-slide-up opacity-100">
           <div class="max-w-lg mx-auto">

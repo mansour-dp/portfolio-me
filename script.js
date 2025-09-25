@@ -166,62 +166,90 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Variables globales pour le thème
+let themeIcons = [];
+
+// Fonction pour mettre à jour le bouton mobile
+function updateMobileThemeButton(theme) {
+  console.log('updateMobileThemeButton appelée avec:', theme); // Debug
+  const mobileThemeText = document.querySelector('.mobile-theme-text');
+  console.log('Element mobile-theme-text trouvé:', mobileThemeText); // Debug
+  if (mobileThemeText) {
+    if (theme === "dark") {
+      mobileThemeText.textContent = "Mode clair";
+    } else {
+      mobileThemeText.textContent = "Mode sombre";
+    }
+    console.log('Texte mis à jour:', mobileThemeText.textContent); // Debug
+  } else {
+    console.error('Element .mobile-theme-text non trouvé!'); // Debug
+  }
+}
+
+// Fonction pour activer le mode sombre
+function setDarkMode() {
+  document.body.setAttribute("theme", "dark");
+  localStorage.setItem("theme", "dark");
+
+  themeIcons.forEach((icon) => {
+    if (icon.hasAttribute("src-dark")) {
+      icon.src = icon.getAttribute("src-dark");
+    }
+  });
+
+  // Mettre à jour le texte du bouton mobile
+  updateMobileThemeButton("dark");
+}
+
+// Fonction pour activer le mode clair
+function setLightMode() {
+  document.body.removeAttribute("theme");
+  localStorage.setItem("theme", "light");
+
+  themeIcons.forEach((icon) => {
+    if (icon.hasAttribute("src-light")) {
+      icon.src = icon.getAttribute("src-light");
+    }
+  });
+
+  // Mettre à jour le texte du bouton mobile
+  updateMobileThemeButton("light");
+}
+
+// Fonction pour basculer entre les thèmes (GLOBALE)
+function setTheme() {
+  console.log('setTheme() appelée'); // Debug
+  let currentTheme = document.body.getAttribute("theme");
+  console.log('Theme actuel:', currentTheme); // Debug
+  if (currentTheme === "dark") {
+    setLightMode();
+  } else {
+    setDarkMode();
+  }
+}
+
+// Fonction pour initialiser le thème
+function initializeTheme() {
+  const currentTheme = localStorage.getItem("theme");
+  if (currentTheme === "dark") {
+    setDarkMode();
+  } else {
+    setLightMode(); // Mode par défaut est clair
+  }
+}
+
 // Gestion du mode sombre/clair
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("modeToggle");
-  const themeIcons = document.querySelectorAll(".icon");
-  const currentTheme = localStorage.getItem("theme");
-
-  // Fonction pour initialiser le thème
-  function initializeTheme() {
-    if (currentTheme === "dark") {
-      setDarkMode();
-    } else {
-      setLightMode(); // Mode par défaut est clair
-    }
-  }
+  themeIcons = document.querySelectorAll(".icon");
 
   // Initialiser le thème au chargement
   initializeTheme();
 
-  // Gérer le clic sur le bouton de thème
+  // Gérer le clic sur le bouton de thème desktop
   if (btn) {
     btn.addEventListener("click", function () {
       setTheme();
-    });
-  }
-
-  // Fonction pour basculer entre les thèmes
-  function setTheme() {
-    let currentTheme = document.body.getAttribute("theme");
-    if (currentTheme === "dark") {
-      setLightMode();
-    } else {
-      setDarkMode();
-    }
-  }
-
-  // Fonction pour activer le mode sombre
-  function setDarkMode() {
-    document.body.setAttribute("theme", "dark");
-    localStorage.setItem("theme", "dark");
-
-    themeIcons.forEach((icon) => {
-      if (icon.hasAttribute("src-dark")) {
-        icon.src = icon.getAttribute("src-dark");
-      }
-    });
-  }
-
-  // Fonction pour activer le mode clair
-  function setLightMode() {
-    document.body.removeAttribute("theme");
-    localStorage.setItem("theme", "light");
-
-    themeIcons.forEach((icon) => {
-      if (icon.hasAttribute("src-light")) {
-        icon.src = icon.getAttribute("src-light");
-      }
     });
   }
 });

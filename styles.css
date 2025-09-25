@@ -598,7 +598,7 @@ button:focus {
 }
 
 .mobile-menu.open {
-  max-height: 400px;
+  max-height: 450px;
 }
 
 .mobile-nav-link {
@@ -619,6 +619,60 @@ button:focus {
 
 .mobile-nav-link:last-child {
   border-bottom: none;
+}
+
+/* Séparateur menu mobile */
+.mobile-menu-separator {
+  height: 1px;
+  background: var(--border-color);
+  margin: 0.5rem 1rem;
+}
+
+/* Bouton Dark Mode Mobile */
+.mobile-theme-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.mobile-theme-button:hover {
+  background: var(--accent-color-light);
+  color: var(--accent-color);
+  padding-left: 2rem;
+}
+
+.mobile-theme-icon {
+  margin-right: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.mobile-theme-button:hover .mobile-theme-icon {
+  transform: rotate(180deg);
+}
+
+.mobile-theme-text {
+  font-family: inherit;
+}
+
+/* Dark mode styles pour le bouton mobile */
+[theme="dark"] .mobile-theme-button,
+.dark .mobile-theme-button {
+  color: var(--text-color);
+}
+
+[theme="dark"] .mobile-theme-button:hover,
+.dark .mobile-theme-button:hover {
+  background: var(--accent-color-light);
+  color: var(--accent-color);
 }
 
 /* Ancien code hamburger supprimé - remplacé par navigation moderne */
@@ -989,9 +1043,12 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-[theme="dark"] .glass-effect {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+[theme="dark"] .glass-effect,
+.dark .glass-effect {
+  background: transparent;
+  border: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Classes Tailwind manquantes pour glassmorphisme */
@@ -4491,6 +4548,7 @@ input[name="_honey"] {
   background-color: rgba(248, 250, 252, 1);
 }
 
+[theme="dark"] .bg-background-100,
 .dark .bg-background-100 {
   background-color: rgba(15, 23, 42, 1);
 }
@@ -4499,6 +4557,40 @@ input[name="_honey"] {
   background-color: rgba(15, 23, 42, 1);
 }
 
+[theme="dark"] .bg-background-900,
 .dark .bg-background-900 {
   background-color: rgba(2, 6, 23, 1);
+}
+
+/* Background classes pour mobile */
+.bg-background-50 {
+  background-color: rgba(248, 250, 252, 0.5);
+}
+
+[theme="dark"] .bg-background-50,
+.dark .bg-background-50 {
+  background-color: transparent;
+}
+
+.bg-background-800 {
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+[theme="dark"] .bg-background-800,
+.dark .bg-background-800 {
+  background-color: transparent;
+}
+
+/* Classes manquantes */
+.bg-transparent {
+  background-color: transparent;
+}
+
+.border-border-50 {
+  border-color: rgba(148, 163, 184, 0.1);
+}
+
+[theme="dark"] .border-border-50,
+.dark .border-border-50 {
+  border-color: rgba(71, 85, 105, 0.2);
 }
