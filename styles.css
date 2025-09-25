@@ -5220,396 +5220,71 @@ textarea:focus {
     height: 24px;
   }
 }
-/* ===== BOUTON SCROLL VERS LE HAUT ===== */
-.scroll-to-top-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 4rem;
-  height: 4rem;
-  background: var(--card-background);
-  border: 2px solid var(--accent-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  transform: translateY(100px);
-  opacity: 0;
-  visibility: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: 1000;
-}
-
-.scroll-to-top-btn:hover {
-  transform: translateY(0) scale(1.1);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  background: var(--accent-color);
-  color: var(--card-background);
-}
-
-.scroll-to-top-btn.visible {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-}
-
-.scroll-to-top-btn svg {
-  position: relative;
-}
-
-.scroll-to-top-btn .scroll-icon {
-  color: var(--accent-color);
-  transition: all 0.3s ease;
-  z-index: 2;
-}
-
-.scroll-to-top-btn:hover .scroll-icon {
-  color: var(--card-background);
-  transform: translateY(-2px);
-}
-
-/* Cercle de progression */
-.scroll-to-top-btn circle:last-child {
-  stroke-dasharray: 188.5;
-  stroke-dashoffset: 188.5;
-  transition: stroke-dashoffset 0.3s ease;
-}
-
-/* Animation du cercle de progression */
-.scroll-to-top-btn.progress circle:last-child {
-  stroke-dashoffset: calc(188.5 - (188.5 * var(--scroll-progress, 0)));
-}
-
-/* Mode sombre */
-[theme="dark"] .scroll-to-top-btn {
-  background: rgba(31, 41, 55, 0.9);
-  border-color: var(--accent-color);
-}
-
-[theme="dark"] .scroll-to-top-btn:hover {
-  background: var(--accent-color);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .scroll-to-top-btn {
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-  
-  .scroll-to-top-btn .scroll-icon {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .scroll-to-top-btn svg.absolute {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-}
 
 /* ============================
-   BOUTON SCROLL TO TOP MODERNE
+   BOUTON SCROLL TO TOP
    ============================ */
-
-.scroll-to-top-modern {
+.scroll-to-top {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 56px;
-  height: 56px;
-  background: var(--glass-dark);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  border: none;
   border-radius: 50%;
+  color: white;
   cursor: pointer;
-  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px) scale(0.9);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: translateY(20px);
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.scroll-to-top-modern.show {
+.scroll-to-top.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
-.scroll-to-top-modern:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.15),
-    0 4px 8px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-color);
+.scroll-to-top:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 30px rgba(0, 123, 255, 0.4);
 }
 
-.scroll-to-top-modern:active {
-  transform: translateY(-1px) scale(0.98);
+.scroll-to-top:active {
+  transform: translateY(-1px) scale(1.05);
 }
 
-/* Container du cercle de progression */
-.scroll-progress-ring {
-  position: relative;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.scroll-to-top svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
 }
 
-/* SVG du cercle de progression */
-.progress-ring {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: rotate(-90deg);
-  width: 56px;
-  height: 56px;
-}
-
-/* Cercle de fond */
-.progress-ring-circle-bg {
-  color: var(--text-color-light);
-  opacity: 0.2;
-}
-
-/* Cercle de progression */
-.progress-ring-circle {
-  color: var(--accent-color);
-  stroke-dasharray: 163.36; /* 2 * π * 26 */
-  stroke-dashoffset: 163.36;
-  transition: stroke-dashoffset 0.05s ease-out;
-}
-
-/* Icône flèche */
-.scroll-arrow-icon {
-  position: relative;
-  z-index: 2;
-  color: var(--accent-color);
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.scroll-to-top-modern:hover .scroll-arrow-icon {
+.scroll-to-top:hover svg {
   transform: translateY(-2px);
-  color: var(--accent-color);
-}
-
-/* Mode sombre */
-[theme="dark"] .scroll-to-top-modern {
-  background: rgba(26, 26, 26, 0.95);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-[theme="dark"] .scroll-to-top-modern:hover {
-  border-color: var(--accent-color);
-  box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Animation de pulsation subtile */
-@keyframes subtlePulse {
-  0%, 100% { 
-    box-shadow: 
-      0 4px 20px rgba(0, 0, 0, 0.1),
-      0 1px 3px rgba(0, 0, 0, 0.1),
-      0 0 0 0 var(--accent-color-light);
-  }
-  50% { 
-    box-shadow: 
-      0 4px 20px rgba(0, 0, 0, 0.1),
-      0 1px 3px rgba(0, 0, 0, 0.1),
-      0 0 0 8px transparent;
-  }
-}
-
-.scroll-to-top-modern.show {
-  animation: subtlePulse 3s infinite;
-}
-
-/* Responsive pour tablettes */
-@media (max-width: 1024px) {
-  .scroll-to-top-modern {
-    bottom: 1.8rem;
-    right: 1.8rem;
-    width: 52px;
-    height: 52px;
-  }
-  
-  .scroll-progress-ring {
-    width: 52px;
-    height: 52px;
-  }
-  
-  .progress-ring {
-    width: 52px;
-    height: 52px;
-  }
-  
-  .progress-ring-circle,
-  .progress-ring-circle-bg {
-    r: 24;
-    cx: 26;
-    cy: 26;
-  }
-  
-  .progress-ring-circle {
-    stroke-dasharray: 150.8; /* 2 * π * 24 */
-    stroke-dashoffset: 150.8;
-  }
 }
 
 /* Responsive pour mobile */
 @media (max-width: 768px) {
-  .scroll-to-top-modern {
-    bottom: 1.2rem;
-    right: 1.2rem;
-    width: 50px;
-    height: 50px;
-    box-shadow: 
-      0 6px 25px rgba(0, 0, 0, 0.15),
-      0 2px 6px rgba(0, 0, 0, 0.1);
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
   }
-  
-  .scroll-to-top-modern:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 
-      0 8px 30px rgba(0, 0, 0, 0.2),
-      0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .scroll-progress-ring {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .progress-ring {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .progress-ring-circle,
-  .progress-ring-circle-bg {
-    r: 23;
-    cx: 25;
-    cy: 25;
-  }
-  
-  .progress-ring-circle {
-    stroke-dasharray: 144.51; /* 2 * π * 23 */
-    stroke-dashoffset: 144.51;
-    stroke-width: 2.5;
-  }
-  
-  .progress-ring-circle-bg {
-    stroke-width: 2;
-  }
-  
-  .scroll-arrow-icon svg {
-    width: 19px;
-    height: 19px;
-    stroke-width: 2.5;
+
+  .scroll-to-top svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
-/* Responsive pour petits mobiles */
-@media (max-width: 480px) {
-  .scroll-to-top-modern {
-    bottom: 1rem;
-    right: 1rem;
-    width: 46px;
-    height: 46px;
-  }
-  
-  .scroll-progress-ring {
-    width: 46px;
-    height: 46px;
-  }
-  
-  .progress-ring {
-    width: 46px;
-    height: 46px;
-  }
-  
-  .progress-ring-circle,
-  .progress-ring-circle-bg {
-    r: 21;
-    cx: 23;
-    cy: 23;
-  }
-  
-  .progress-ring-circle {
-    stroke-dasharray: 131.95; /* 2 * π * 21 */
-    stroke-dashoffset: 131.95;
-  }
-  
-  .scroll-arrow-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-}
 
-/* Fix pour les écrans très petits */
-@media (max-width: 360px) {
-  .scroll-to-top-modern {
-    bottom: 0.8rem;
-    right: 0.8rem;
-    width: 44px;
-    height: 44px;
-  }
-  
-  .scroll-progress-ring {
-    width: 44px;
-    height: 44px;
-  }
-  
-  .progress-ring {
-    width: 44px;
-    height: 44px;
-  }
-  
-  .progress-ring-circle,
-  .progress-ring-circle-bg {
-    r: 20;
-    cx: 22;
-    cy: 22;
-  }
-  
-  .progress-ring-circle {
-    stroke-dasharray: 125.66; /* 2 * π * 20 */
-    stroke-dashoffset: 125.66;
-  }
-}
 
-/* Amélioration pour les écrans tactiles */
-@media (hover: none) and (pointer: coarse) {
-  .scroll-to-top-modern {
-    transform: translateY(20px) scale(0.95);
-  }
-  
-  .scroll-to-top-modern.show {
-    transform: translateY(0) scale(1);
-  }
-  
-  .scroll-to-top-modern:active {
-    transform: translateY(0) scale(0.95);
-    transition: transform 0.1s ease;
-  }
-}

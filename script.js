@@ -466,114 +466,52 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================
-// BOUTON SCROLL TO TOP MODERNE AVEC PROGRESSION
+// BOUTON SCROLL TO TOP
 // ============================
-
-class ModernScrollToTop {
+class ScrollToTop {
   constructor() {
-    this.btn = document.getElementById('scrollToTopBtn');
-    this.progressCircle = document.querySelector('.progress-ring-circle');
+    this.button = document.getElementById('scrollToTop');
     this.isVisible = false;
-    this.circumference = 2 * Math.PI * 26; // rayon desktop = 26
-    this.isMobile = window.innerWidth <= 768;
     
-    if (!this.btn || !this.progressCircle) return;
+    if (!this.button) return;
     
     this.init();
   }
   
   init() {
-    // Adapter la circonférence selon l'écran
-    this.updateCircumference();
+    // Throttle pour optimiser les performances
+    this.throttledScroll = this.throttle(this.handleScroll.bind(this), 16);
     
-    // Configurer le cercle de progression
-    this.progressCircle.style.strokeDasharray = this.circumference;
-    this.progressCircle.style.strokeDashoffset = this.circumference;
-    
-    // Throttle pour optimiser les performances du scroll
-    this.throttledScroll = this.throttle(this.handleScroll.bind(this), 16); // 60fps
-    
-    // Event listeners optimisés
-    this.btn.addEventListener('click', this.scrollToTop.bind(this));
+    // Event listeners
+    this.button.addEventListener('click', this.scrollToTop.bind(this));
     window.addEventListener('scroll', this.throttledScroll, { passive: true });
-    window.addEventListener('resize', this.handleResize.bind(this));
     
-    // Initialiser immédiatement
+    // Vérification initiale
     this.handleScroll();
   }
   
-  // Fonction throttle pour optimiser les performances
   throttle(func, delay) {
     let timeoutId;
     let lastExecTime = 0;
-    return function (...args) {
+    return (...args) => {
       const currentTime = Date.now();
       
       if (currentTime - lastExecTime > delay) {
-        func.apply(this, args);
+        func(...args);
         lastExecTime = currentTime;
       } else {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
-          func.apply(this, args);
+          func(...args);
           lastExecTime = Date.now();
         }, delay - (currentTime - lastExecTime));
       }
     };
   }
   
-  updateCircumference() {
-    const width = window.innerWidth;
-    let radius;
-    
-    if (width <= 360) {
-      radius = 20; // Très petits mobiles
-    } else if (width <= 480) {
-      radius = 21; // Petits mobiles
-    } else if (width <= 768) {
-      radius = 23; // Mobiles
-    } else if (width <= 1024) {
-      radius = 24; // Tablettes
-    } else {
-      radius = 26; // Desktop
-    }
-    
-    const newCircumference = 2 * Math.PI * radius;
-    
-    if (newCircumference !== this.circumference) {
-      this.circumference = newCircumference;
-      if (this.progressCircle) {
-        this.progressCircle.style.strokeDasharray = this.circumference;
-        // Recalculer immédiatement la progression
-        this.handleScroll();
-      }
-    }
-    
-    this.isMobile = width <= 768;
-  }
-  
   handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = Math.min(scrollTop / docHeight, 1);
-    
-    // Mettre à jour la progression du cercle
-    const offset = this.circumference - (scrollPercent * this.circumference);
-    this.progressCircle.style.strokeDashoffset = offset;
-    
-    // Afficher/masquer le bouton avec un seuil adaptatif selon la taille d'écran
-    const width = window.innerWidth;
-    let threshold;
-    
-    if (width <= 480) {
-      threshold = 120; // Très petits écrans
-    } else if (width <= 768) {
-      threshold = 150; // Mobiles
-    } else if (width <= 1024) {
-      threshold = 180; // Tablettes
-    } else {
-      threshold = 200; // Desktop
-    }
+    const threshold = window.innerWidth <= 768 ? 150 : 200;
     
     if (scrollTop > threshold && !this.isVisible) {
       this.showButton();
@@ -582,30 +520,22 @@ class ModernScrollToTop {
     }
   }
   
-  handleResize() {
-    this.updateCircumference();
-    this.handleScroll(); // Recalculer la progression
-  }
-  
   showButton() {
-    this.btn.classList.add('show');
+    this.button.classList.add('show');
     this.isVisible = true;
   }
   
   hideButton() {
-    this.btn.classList.remove('show');
+    this.button.classList.remove('show');
     this.isVisible = false;
   }
   
   scrollToTop() {
-    // Animation de scroll fluide et rapide
     const startPosition = window.pageYOffset;
-    const duration = 600; // Durée réduite pour plus de réactivité
+    const duration = 600;
     const startTime = performance.now();
     
-    const easeOutQuart = (t) => {
-      return 1 - Math.pow(1 - t, 4); // Animation plus rapide
-    };
+    const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
     
     const animateScroll = (currentTime) => {
       const elapsed = currentTime - startTime;
@@ -620,18 +550,12 @@ class ModernScrollToTop {
     };
     
     requestAnimationFrame(animateScroll);
-    
-    // Feedback visuel
-    this.btn.style.transform = 'translateY(-1px) scale(0.95)';
-    setTimeout(() => {
-      if (this.btn.style.transform) {
-        this.btn.style.transform = '';
-      }
-    }, 150);
   }
 }
 
 // Initialiser le bouton scroll to top
-document.addEventListener('DOMContentLoaded', function() {
-  new ModernScrollToTop();
+document.addEventListener('DOMContentLoaded', () => {
+  new ScrollToTop();
 });
+
+
