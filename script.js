@@ -447,3 +447,77 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// ============================
+// CONFIGURATION ET GESTION EMAILJS
+// ============================
+
+// Configuration EmailJS
+(function() {
+  // Initialiser EmailJS avec votre Public Key
+  emailjs.init("XAcFRq3UXaXAWAIa3"); // Remplacez par votre clé publique EmailJS
+})();
+
+// Gestion du formulaire de contact
+document.addEventListener('DOMContentLoaded', function() {
+  const contactForm = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitText = document.getElementById('submitText');
+  const loadingSpinner = document.getElementById('loadingSpinner');
+  const formStatus = document.getElementById('formStatus');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Désactiver le bouton et afficher le loader
+      submitBtn.disabled = true;
+      submitText.textContent = 'Envoi en cours...';
+      loadingSpinner.classList.remove('hidden');
+      formStatus.classList.add('hidden');
+
+      // Collecter les données du formulaire
+      const formData = new FormData(contactForm);
+      const templateParams = {
+        from_name: formData.get('from_name'),
+        from_email: formData.get('from_email'),
+        phone: formData.get('phone') || 'Non renseigné',
+        message: formData.get('message'),
+        to_name: 'Mansour Diop', // Votre nom
+      };
+
+      // Envoyer l'email via EmailJS
+      emailjs.send(
+        'service_euamka5',    // Remplacez par votre Service ID
+        'template_zjmhmx1',   // Remplacez par votre Template ID
+        templateParams
+      )
+      .then(function(response) {
+        console.log('Email envoyé avec succès!', response.status, response.text);
+        showFormStatus('success', 'Message envoyé avec succès ! Je vous répondrai bientôt.');
+        contactForm.reset();
+      })
+      .catch(function(error) {
+        console.log('Erreur lors de l\'envoi:', error);
+        showFormStatus('error', 'Erreur lors de l\'envoi. Veuillez réessayer ou me contacter directement.');
+      })
+      .finally(function() {
+        // Réactiver le bouton
+        submitBtn.disabled = false;
+        submitText.textContent = 'Envoyer le message';
+        loadingSpinner.classList.add('hidden');
+      });
+    });
+  }
+
+  // Fonction pour afficher le statut du formulaire
+  function showFormStatus(type, message) {
+    formStatus.textContent = message;
+    formStatus.className = `form-status-message ${type}`;
+    
+    // Masquer le message après 5 secondes
+    setTimeout(function() {
+      formStatus.style.display = 'none';
+    }, 5000);
+  }
+});
